@@ -13,17 +13,21 @@ import Row from 'react-bootstrap/Row';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [data, setData] = useState({ text: 'Bucharest', id: 'bucharest' });
+  const [data, setData] = useState({ text: 'Faro', id: 'faro' });
+  const [period, setPeriod] = useState('all');
   const handleClick = (event) =>
     setData({
       text: event.target.firstChild.data,
       id: event.target.getAttribute('data-city'),
     });
+  const handleDropdown = (event) =>
+    setPeriod(event.target.getAttribute('data-period'));
+
   return (
     <Container>
       <Row className="text-center">
         <h1>
-          <Badge className="mt-5">Erasmus Air Pollution Visualizer</Badge>
+          <Badge className="mt-3">Erasmus Air Pollution Visualizer</Badge>
         </h1>
       </Row>
       <Row>
@@ -66,20 +70,23 @@ function App() {
           </ButtonGroup>
         </ButtonToolbar>
       </Row>
-      <Row className="text-center my-3">
+      <Row className="text-center my-2">
         <DropdownButton
           className="text-center"
-          menuVariant="light"
           variant="outline-dark"
           align="start"
           title="Period Of Time"
           size="lg"
         >
-          <Dropdown.Item>Last Month</Dropdown.Item>
-          <Dropdown.Item>Last 3 Months</Dropdown.Item>
-          <Dropdown.Item>Last 6 Months</Dropdown.Item>
-          <Dropdown.Item>Last Year</Dropdown.Item>
-          <Dropdown.Item>All Time</Dropdown.Item>
+          <Dropdown.Item data-period="1" onClick={handleDropdown}>
+            Last Month
+          </Dropdown.Item>
+          <Dropdown.Item data-period="3" onClick={handleDropdown}>
+            Last 3 Months
+          </Dropdown.Item>
+          <Dropdown.Item data-period="all" onClick={handleDropdown}>
+            All Time
+          </Dropdown.Item>
         </DropdownButton>
       </Row>
       <Row>
@@ -88,7 +95,7 @@ function App() {
         </h2>
       </Row>
       <Row>
-        <LineChart city={data.id} />
+        <LineChart city={data.id} period={period} />
       </Row>
     </Container>
   );
