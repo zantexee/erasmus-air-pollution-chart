@@ -6,6 +6,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Container from 'react-bootstrap/Container';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Row from 'react-bootstrap/Row';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,8 +21,8 @@ function App() {
     });
   return (
     <Container>
-      <Row>
-        <h1 className="text-center">
+      <Row className="text-center">
+        <h1>
           <Badge className="mt-5">Erasmus Air Pollution Visualizer</Badge>
         </h1>
       </Row>
@@ -63,6 +65,22 @@ function App() {
             </Button>
           </ButtonGroup>
         </ButtonToolbar>
+      </Row>
+      <Row className="text-center my-3">
+        <DropdownButton
+          className="text-center"
+          menuVariant="light"
+          variant="outline-dark"
+          align="start"
+          title="Period Of Time"
+          size="lg"
+        >
+          <Dropdown.Item>Last Month</Dropdown.Item>
+          <Dropdown.Item>Last 3 Months</Dropdown.Item>
+          <Dropdown.Item>Last 6 Months</Dropdown.Item>
+          <Dropdown.Item>Last Year</Dropdown.Item>
+          <Dropdown.Item>All Time</Dropdown.Item>
+        </DropdownButton>
       </Row>
       <Row>
         <h2 className="my-2 text-center">
