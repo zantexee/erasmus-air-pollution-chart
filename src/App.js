@@ -1,24 +1,78 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+
+import LineChart from './Components/LineChart';
+import Badge from 'react-bootstrap/Badge';
+import Button from 'react-bootstrap/Button';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [data, setData] = useState({ text: 'Bucharest', id: 'bucharest' });
+  const handleClick = (event) =>
+    setData({
+      text: event.target.firstChild.data,
+      id: event.target.getAttribute('data-city'),
+    });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Container>
+      <Row>
+        <h1 className="text-center">
+          <Badge className="mt-5">Erasmus Air Pollution Visualizer</Badge>
+        </h1>
+      </Row>
+      <Row>
+        <ButtonToolbar
+          onClick={handleClick}
+          className="my-3 justify-content-center"
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <ButtonGroup className="my-1 ">
+            <Button className="mx-1" data-city="uherske" variant="success">
+              Uherské Hradiště
+            </Button>
+            <Button className="mx-1" data-city="faro" variant="success">
+              Faro
+            </Button>
+            <Button className="mx-1" data-city="turnu" variant="success">
+              Turnu Magurele
+            </Button>
+            <Button className="mx-1" data-city="lund" variant="success">
+              Lund
+            </Button>
+          </ButtonGroup>
+          <ButtonGroup className="my-1 ">
+            <Button className="mx-1" data-city="prague" variant="secondary">
+              Prague
+            </Button>
+            <Button className="mx-1" data-city="lisbon" variant="secondary">
+              Lisbon
+            </Button>
+            <Button className="mx-1" data-city="bucharest" variant="secondary">
+              Bucharest
+            </Button>
+            <Button className="mx-1" data-city="stockholm" variant="secondary">
+              Stockholm
+            </Button>
+          </ButtonGroup>
+          <ButtonGroup className="my-1">
+            <Button className="mx-1" data-city="kiev" variant="danger">
+              Kyiv
+            </Button>
+          </ButtonGroup>
+        </ButtonToolbar>
+      </Row>
+      <Row>
+        <h2 className="my-2 text-center">
+          Current City: <Badge bg="info">{data.text}</Badge>
+        </h2>
+      </Row>
+      <Row>
+        <LineChart city={data.id} />
+      </Row>
+    </Container>
   );
 }
 
