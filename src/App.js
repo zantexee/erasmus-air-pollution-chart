@@ -1,33 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 
-import LineChart from './Components/LineChart';
-import Badge from 'react-bootstrap/Badge';
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import Container from 'react-bootstrap/Container';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Row from 'react-bootstrap/Row';
+import LineChart from "./Components/LineChart";
+import Alert from "react-bootstrap/Alert";
+import Badge from "react-bootstrap/Badge";
+import Button from "react-bootstrap/Button";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Container from "react-bootstrap/Container";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Row from "react-bootstrap/Row";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
-  const [data, setData] = useState({ text: 'Faro', id: 'faro' });
-  const [period, setPeriod] = useState('all');
+  const [data, setData] = useState({ text: "Faro", id: "faro" });
+  const [period, setPeriod] = useState("all");
+  const [isHidden, setHidden] = useState("initial");
+
   const handleClick = (event) =>
-    setData({
-      text: event.target.firstChild.data,
-      id: event.target.getAttribute('data-city'),
-    });
+    setTimeout(() => {
+      setData({
+        text: event.target.firstChild.data,
+        id: event.target.getAttribute("data-city"),
+      });
+      setHidden("none");
+    }, 700);
   const handleDropdown = (event) =>
-    setPeriod(event.target.getAttribute('data-period'));
+    setPeriod(event.target.getAttribute("data-period"));
 
   return (
     <Container>
+      <Row className="mt-3 text-center" style={{ display: isHidden }}>
+        <Alert key="warning" variant="danger">
+          Due to some shortage in data, there might be unexpected results when
+          using the app. We apologize for any inconvenience!
+        </Alert>
+      </Row>
       <Row className="text-center">
         <h1>
-          <Badge className="mt-3">Erasmus Air Pollution Visualizer</Badge>
+          <Badge className="mt-2">Erasmus Air Pollution Visualizer</Badge>
         </h1>
       </Row>
       <Row>
