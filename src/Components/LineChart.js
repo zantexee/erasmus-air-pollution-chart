@@ -117,7 +117,8 @@ const LineChart = ({ city, period }) => {
       ],
     };
     return <Line options={options} data={data} />;
-  } else if (period === '1') {
+  }  
+  if (period === '1') {
     const options = {
       responsive: true,
       plugins: {
@@ -146,7 +147,8 @@ const LineChart = ({ city, period }) => {
       ],
     };
     return <Line options={options} data={data} />;
-  } else if (period === '3') {
+  } 
+   if (period === '3') {
     const options = {
       responsive: true,
       plugins: {
